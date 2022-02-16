@@ -1,0 +1,2 @@
+# typeScript
+Curso Type Script
