@@ -10,4 +10,11 @@ export class Negociacao {
     get data() {
         return this._data;
     }
+    static CriaDe(dataString, quantidadeString, valorString) {
+        const exp = /-/g;
+        const date = new Date(dataString.replace(exp, ','));
+        const qtde = parseInt(quantidadeString);
+        const valor = parseFloat(valorString);
+        return new Negociacao(date, qtde, valor);
+    }
 }
