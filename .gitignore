@@ -1,2 +1,2 @@
-/src/node_modules
-/src/servidor-api/node_modules
+/node_modules
+/servidor-api/node_modules
