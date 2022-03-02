@@ -1,4 +1,13 @@
+var __decorate = (this && this.__decorate) || function (decorators, target, key, desc) {
+    var c = arguments.length, r = c < 3 ? target : desc === null ? desc = Object.getOwnPropertyDescriptor(target, key) : desc, d;
+    if (typeof Reflect === "object" && typeof Reflect.decorate === "function") r = Reflect.decorate(decorators, target, key, desc);
+    else for (var i = decorators.length - 1; i >= 0; i--) if (d = decorators[i]) r = (c < 3 ? d(r) : c > 3 ? d(target, key, r) : d(target, key)) || r;
+    return c > 3 && r && Object.defineProperty(target, key, r), r;
+};
+import { logarTempoDeExecucao } from "../decorators/logar-tempo-de-execucao.js";
 import { DiasDaSemana } from "../enums/dias-da-semana.js";
+import { TiposMensagem } from "../enums/tipos-mensagem.js";
+import { Mensagem } from "../models/mensagem.js";
 import { Negociacao } from "../models/negociacao.js";
 import { Negociacoes } from "../models/negociacoes.js";
 import { MensagemView } from "../views/mensagem-view.js";
@@ -15,10 +24,8 @@ export class NegociacaoController {
     }
     adiciona() {
         const negociacao = Negociacao.CriaDe(this.inputData.value, this.inputQuantidade.value, this.inputValor.value);
-        this.mensagemView.error = false;
         if (!this.ehDiaUtil(negociacao.data)) {
-            this.mensagemView.error = true;
-            this.mensagemView.update('Informe um dia útil');
+            this.mensagemView.update(new Mensagem('Informe um dia útil', TiposMensagem.Error));
             return;
         }
         this.negociacoes.adiciona(negociacao);
@@ -37,6 +44,9 @@ export class NegociacaoController {
     }
     atualizaView() {
         this.negociacoesView.update(this.negociacoes);
-        this.mensagemView.update('Negociação adicionada com sucesso');
+        this.mensagemView.update(new Mensagem('Negociação adicionada com sucesso', TiposMensagem.Sucess));
     }
 }
+__decorate([
+    logarTempoDeExecucao()
+], NegociacaoController.prototype, "adiciona", null);

@@ -1,4 +1,7 @@
+import { logarTempoDeExecucao } from "../decorators/logar-tempo-de-execucao.js";
 import { DiasDaSemana } from "../enums/dias-da-semana.js";
+import { TiposMensagem } from "../enums/tipos-mensagem.js";
+import { Mensagem } from "../models/mensagem.js";
 import { Negociacao } from "../models/negociacao.js";
 import { Negociacoes } from "../models/negociacoes.js";
 import { MensagemView } from "../views/mensagem-view.js";
@@ -22,18 +25,17 @@ export class NegociacaoController{
         this.negociacoesView.update(this.negociacoes);
     }
 
+    @logarTempoDeExecucao()
     public adiciona() : void {
         const negociacao = Negociacao.CriaDe(
            this.inputData.value,
            this.inputQuantidade.value,
            this.inputValor.value 
         );
-        this.mensagemView.error = false;
        
         if(!this.ehDiaUtil(negociacao.data))
         {
-            this.mensagemView.error = true;
-            this.mensagemView.update('Informe um dia útil');
+            this.mensagemView.update(new Mensagem('Informe um dia útil', TiposMensagem.Error));
             return;
         }
 
@@ -56,6 +58,6 @@ export class NegociacaoController{
 
     private atualizaView(): void{
         this.negociacoesView.update(this.negociacoes);      
-        this.mensagemView.update('Negociação adicionada com sucesso');
+        this.mensagemView.update(new Mensagem('Negociação adicionada com sucesso', TiposMensagem.Sucess));
     }
 }

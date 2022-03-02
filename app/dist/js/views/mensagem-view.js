@@ -1,15 +1,12 @@
+import { TiposMensagem } from "../enums/tipos-mensagem.js";
 import { View } from "./view.js";
 export class MensagemView extends View {
-    constructor() {
-        super(...arguments);
-        this.error = false;
-    }
     template(model) {
         let tipoErro = "info";
-        if (this.error)
+        if (model.tipo == TiposMensagem.Error)
             tipoErro = "danger";
         return `
-            <p class="alert alert-${tipoErro}">${model}</p>
+            <p class="alert alert-${tipoErro}">${model.descricao}</p>
         `;
     }
 }
