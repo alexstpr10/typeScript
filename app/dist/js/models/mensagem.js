@@ -4,3 +4,4 @@ export class Mensagem {
         this.tipo = tipo;
     }
 }
+//# sourceMappingURL=mensagem.js.map

@@ -1,7 +1,5 @@
-import { Imprimivel } from "../utils/imprimivel.js";
-export class Negociacoes extends Imprimivel {
+export class Negociacoes {
     constructor() {
-        super(...arguments);
         this.negociacoes = [];
     }
     adiciona(negociacao) {
@@ -13,4 +11,8 @@ export class Negociacoes extends Imprimivel {
     paraTexto() {
         return JSON.stringify(this.negociacoes, null, 2);
     }
+    ehIgual(negociacoes) {
+        return JSON.stringify(this.negociacoes) === JSON.stringify(negociacoes.listar());
+    }
 }
+//# sourceMappingURL=negociacoes.js.map
